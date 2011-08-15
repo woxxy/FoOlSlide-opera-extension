@@ -1,29 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <script>
-       window.addEventListener("load", function(){
-        var theButton;
-        var ToolbarUIItemProperties = {
-          title: "FoOlSlide",
-          icon: "50.png",
-          popup: {
-            href: "popup.html",
-            width: 400,
-            height: 400
-          },
-		  badge: {
-            	display: "block",
-            	textContent: "12",
-            	color: "white",
-                backgroundColor: "rgba(211, 0, 4, 1)"
-          }
-        }
-        theButton = opera.contexts.toolbar.createItem(ToolbarUIItemProperties);
-        opera.contexts.toolbar.addItem(theButton);
-      }, false);
-    </script>
 	<script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="background.js"></script>
   </head>
   <body>
   </body>
