@@ -7,19 +7,23 @@
 		<script type="text/javascript">
 			jQuery(document).ready(function(){
 				jQuery.support.cors = true;
-				jQuery.getJSON("http://foolrulez.org/slide/api/reader/chapters/orderby/desc_created/per_page/8", function(data)
+				jQuery.getJSON("http://foolrulez.org/slide/api/reader/chapters/orderby/desc_created/per_page/14", function(data)
 				{				
 					echo = "";
 					jQuery.each(data.chapters, function(i, value){
 						echo += "<tr><td><a href='/slide/reader/comic/"+ value.comic.stub +"' >" + value.comic.name + "</a></td><td>" + ((value.chapter.volume>0)?'Vol.'+value.chapter.volume:'')+ "</td><td>Chapter " + value.chapter.chapter + ((value.chapter.subchapter > 0)?'.'+value.chapter.subchapter:'') + "</td></tr>";
 					});
-					jQuery("table").html(echo);
+					jQuery(".list table").html(echo);
 				});
 			});
 					
 		</script>
 	</head>
 	<body>
-		<table></table>
+		<h1>FoOlSlide</h1>
+		<div class="list">
+			<div class="title">Latest releases</div>
+			<table></table>
+		</div>
 	</body>
 </html>
