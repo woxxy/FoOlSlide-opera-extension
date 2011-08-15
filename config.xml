@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="http://www.example.org/helloworld">
+	<name>FoOlSlide</name>
+	<description>FoOlSlide Opera Widget</description>
+  	<author href="http://foolrulez.org" email="woxxy@foolrulez.org">Woxxy</author>
+  	<icon src="50.png"/>
+</widget>
