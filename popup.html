@@ -3,8 +3,9 @@
 	<head>
 		<title>Hello World!</title>
 		<link rel="stylesheet" href="popup.css" type="text/css" media="screen" />
-		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="a_jquery.js"></script>
 		<script type="text/javascript">
+	jQuery.support.cors = true;
 			jQuery(document).ready(function(){
 				var latest = opera.extension.bgProcess.fetchLatest();
 				var echo = "";
