@@ -5,15 +5,20 @@
 		<link rel="stylesheet" href="popup.css" type="text/css" media="screen" />
 		<script type="text/javascript" src="a_jquery.js"></script>
 		<script type="text/javascript">
-	jQuery.support.cors = true;
+			jQuery.support.cors = true;
 			jQuery(document).ready(function(){
-				var latest = opera.extension.bgProcess.fetchLatest();
 				var echo = "";
-				alert(latest);
-				jQuery.each(latest, function(i, value){
-					echo += "<tr><td><a href='/slide/reader/comic/"+ value.comic.stub +"' >" + value.comic.name + "</a></td><td>" + ((value.chapter.volume>0)?'Vol.'+value.chapter.volume:'')+ "</td><td>Chapter " + value.chapter.chapter + ((value.chapter.subchapter > 0)?'.'+value.chapter.subchapter:'') + "</td></tr>";
-				});
-				jQuery(".list table").html(echo);
+				var data = [];
+				opera.extension.onmessage = function(event){
+					//data = event.data;
+					jQuery.merge(data,event.data.chapters);
+					data.sort(opera.extension.bgProcess.sortByDateTime);
+					jQuery.each(data, function(i, value){
+						echo += "<tr><td><a href='/slide/reader/comic/"+ value.comic.stub +"' >" + value.comic.name + "</a></td><td>" + ((value.chapter.volume>0)?'Vol.'+value.chapter.volume:'')+ "</td><td>Chapter " + value.chapter.chapter + ((value.chapter.subchapter > 0)?'.'+value.chapter.subchapter:'') + "</td></tr>";
+					});
+					jQuery(".list table").html(echo);
+					echo ="";
+				}				
 			});
 					
 		</script>
@@ -29,6 +34,6 @@
 			<div class="title">Latest releases</div>
 			<table></table>
 		</div>
-		
+
 	</body>
 </html>

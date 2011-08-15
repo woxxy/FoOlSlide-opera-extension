@@ -4,8 +4,8 @@ var ToolbarUIItemProperties = {
 	icon: "50.png",
 	popup: {
 		href: "popup.html",
-		width: 400,
-		height: 430
+		width: 450,
+		height: 560
 	},
 	badge: {
 		display: "block",
@@ -18,26 +18,34 @@ theButton = opera.contexts.toolbar.createItem(ToolbarUIItemProperties);
 opera.contexts.toolbar.addItem(theButton);
 
 
-function fetchLatest()
-{
+opera.extension.onconnect = function(event){
 	var sites = [{
 		"site":"http://reader.kireicake.com/"
 	}, {
 		"site":"http://foolrulez.org/slide/"
+	}, {
+		"site":"http://reader.cxcscans.co.cc/"
 	}];
 	var result = [];
 	jQuery.each(sites, function(index, value){
-		jQuery.getJSON(value.site + "api/reader/chapters/orderby/desc_created/", function(data){
-			jQuery.merge(result, data.chapters);
+		jQuery.ajax({
+			url: value.site + 'api/reader/chapters/orderby/desc_created',
+			data:'root=test',
+			type:'json',
+			success: function(msg){
+				event.source.postMessage(msg);
+				opera.postError("success");
+			},
+			error:function(XMLHttpRequest, textStatus, errorThrown){
+				opera.postError(errorThrown);
+			}
 		});
 	});
-	//result.sort(sortByDateTime);
-	return result;
 }
 
 function sortByDateTime(a,b)
 {
-	return dateTimeToDate(a.chapter.created) > dateTimeToDate(b.chapter.created)
+	return dateTimeToDate(a.chapter.created) < dateTimeToDate(b.chapter.created)
 }
 
 function dateTimeToDate(timestamp) {
